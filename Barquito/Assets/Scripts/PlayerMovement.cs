@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     public CharacterController controller;
     public Transform groundCheck;
+    public GameObject flashLight;
 
     public float speed = 12f;
     public float gravity = -9.81f;
@@ -14,6 +15,11 @@ public class PlayerMovement : MonoBehaviour
 
     Vector3 velocity;
     bool isGrounded;
+
+    private void Start()
+    {
+        
+    }
 
     void Update()
     {
@@ -34,5 +40,12 @@ public class PlayerMovement : MonoBehaviour
         velocity.y += gravity * Time.deltaTime;
 
         controller.Move(velocity * Time.deltaTime);
+
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            flashLight.SetActive(true);
+
+        }
     }
 }
