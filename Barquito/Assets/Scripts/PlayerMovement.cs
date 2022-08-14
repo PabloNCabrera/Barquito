@@ -8,6 +8,8 @@ public class PlayerMovement : MonoBehaviour
     public Transform groundCheck;
     public GameObject flashLight;
 
+    public LightScript lightflash;
+
     public float speed = 12f;
     public float gravity = -9.81f;
     public float groundDistance = 0.4f;
@@ -23,6 +25,9 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
         if (isGrounded && velocity.y < 0)
@@ -41,6 +46,13 @@ public class PlayerMovement : MonoBehaviour
 
         controller.Move(velocity * Time.deltaTime);
 
+        if(lightflash.lightOff == true)
+        {
+            flashLight.SetActive(false);
+            lightflash.lightOff = false;
+
+            Debug.Log("Luigi says polla");
+        }
 
         if (Input.GetMouseButtonDown(0))
         {
